@@ -5,7 +5,7 @@ use std::cmp::Ordering;
 fn main() -> Result<(), slint::PlatformError> {
     let ui = AppWindow::new()?;
 
-    ui.on_start({
+    ui.on_start_game({
         let ui_handle = ui.as_weak();
         move || {
             let ui = ui_handle.unwrap();
