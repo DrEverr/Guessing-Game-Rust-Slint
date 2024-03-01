@@ -4,7 +4,7 @@ export component AppWindow inherits Window {
     callback start;
     callback guess(string);
 
-    in-out property<int> lives: 10;
+    in-out property<int> lives;
     in-out property<bool> is-running;
     in-out property<int> secret-number;
     in-out property<string> hint;
