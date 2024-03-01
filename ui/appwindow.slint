@@ -1,0 +1,57 @@
+import { Button, HorizontalBox, VerticalBox } from "std-widgets.slint";
+
+export component AppWindow inherits Window {
+    callback start;
+    callback guess(string);
+
+    in-out property<int> lives: 10;
+    in-out property<bool> is-running;
+    in-out property<int> secret-number;
+    in-out property<string> hint;
+
+    forward-focus: input;
+
+    VerticalBox {
+        alignment: space-between;
+
+        HorizontalBox {
+            alignment: space-between;
+            Button {
+                text: "Start";
+                clicked => {
+                    lives = 10;
+                    is-running = true;
+                    root.start();
+                }
+            }
+            Text {
+                text: "Lives: \{root.lives}";
+            }
+        }
+
+        Text {
+            text: "Guess the number!";
+        }
+
+        Text {
+            text: "Secret number: \{root.secret-number} \{root.hint}";
+        }
+
+        HorizontalBox {
+            alignment: center;
+            Text {
+                text: "Enter your guess:";
+            }
+            input := TextInput {
+                enabled: root.is-running;
+            }
+            guess-button := Button {
+                enabled: root.is-running;
+                text: "Guess";
+                clicked => {
+                    root.guess(input.text);
+                }
+            }
+        }
+    }
+}
